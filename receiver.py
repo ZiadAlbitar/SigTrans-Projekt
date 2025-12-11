@@ -15,7 +15,7 @@ import sounddevice as sd
 import wcslib as wcs
 
 # TODO: Add relevant parameters to parameters.py
-from parameters import Tb, dt, # ...
+from parameters import Tb, dt, fc, fs, Ts, Kc, xc;
 
 def main():
     parser = argparse.ArgumentParser(
@@ -41,9 +41,10 @@ def main():
 
     # TODO: Implement demodulation, etc. here
     # ...
-
+    yb = yr * xc
     # Baseband signal
     # yb = ...
+    
 
     # Symbol decoding
     # TODO: Adjust fs (lab 2 only, leave untouched for lab 1 unless you know what you are doing)
