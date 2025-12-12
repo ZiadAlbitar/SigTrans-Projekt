@@ -16,10 +16,11 @@ wc = 3800*2*pi*4
 lowcut = 3750
 highcut = 3850
 
-Kc = 5
-fs = fc * Kc
-Ts = 1 / fs
+Kc = 4
+Tc = 1/fc
+Ts = Tc / Kc 
 dt = Ts
+fs = 1/Ts
 
 Ac = np.sqrt(2)
 

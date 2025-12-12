@@ -21,7 +21,7 @@ import sounddevice as sd
 import wcslib as wcs
 
 # TODO: Add relevant parameters to parameters.py
-from parameters import Tb, Ac, dt, fc, fs, Ts, Kc, fs;
+from parameters import Tb, Ac, dt, fc, Ts, Kc,fs;
 
 
 def main():
@@ -56,11 +56,10 @@ def main():
 
     # Encode baseband signal
     # TODO: Adjust fs (lab 2 only, leave untouched for lab 1 unless you know what you are doing)
-    bit_seq = np.random.randint(2, size=10)
-    xb = wcs.encode_baseband_signal(bit_seq, Tb, fs)
-    t = np.arange(0, xb.shape[0])*dt
+    xb = wcs.encode_baseband_signal(bs, Tb, fs)
 
     # TODO: Implement transmitter code here
+    t = np.arange(0, xb.shape[0])*dt
     wc = fc*2 * np.pi
     xc = np.sin(wc * t) * np.sqrt(2)
     xm = xc * xb
