@@ -29,12 +29,14 @@ def main():
         prog='transmitter',
         description='Acoustic wireless communication system -- transmitter.'
     )
+
     parser.add_argument(
         '-b',
         '--binary',
         help='message is a binary sequence',
         action='store_true'
     )
+
     parser.add_argument('message', help='message to transmit', nargs='?')
     args = parser.parse_args()
 
