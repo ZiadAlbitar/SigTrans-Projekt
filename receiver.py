@@ -75,15 +75,24 @@ def main():
     # ...
     # xc = A_c*sin(w_c*t)
 
-    yb = yr * xc
+    #yb = yr * xc
+
+    # I = Arxb(t-tr)sin(2wct)
+    # Q = Arxb(t-tr)cos(2wct)
     # Baseband signal
     # yb = ...
+
+    I = 2 * yr * np.sin(wc*t)
+    Q = 2 * yr * np.cos(wc*t)
 
     #LOW PASS FILTER HERE!!!!!!!!!!!!!!
     w = 3800 / (fs / 2)
     b, a = signal.butter(5, w, 'low')
-    output = signal.filtfilt(b, a, yb)
-    
+    output_I = signal.filtfilt(b, a, I)
+    output_Q = signal.filtfilt(b, a, Q)
+
+    phase = np.arctan2(output_I, output_Q)
+    output = np.sqrt(output_I**2 + output_Q**2)
 
     # Symbol decoding
     # TODO: Adjust fs (lab 2 only, leave untouched for lab 1 unless you know what you are doing)
