@@ -11,16 +11,16 @@ channel_id = 14   # Your channel ID
 Tb = 0.04  # Symbol width in seconds
 
 fc = 3800
-wc = 3800*2*pi*4 
+wc = 3800*2*pi 
 
 lowcut = 3750
 highcut = 3850
 
 Kc = 4
-Tc = 1/fc
-Ts = Tc / Kc 
+Tc = 1/fc #1/3800 ~ 0.00026
+Ts = Tc / Kc # ~ 0.00026/4 ~ 0.000066
 dt = Ts
-fs = 1/Ts
+fs = 1/Ts # 1/0.000066 ~ 15151.5
 
 Ac = np.sqrt(2)
 

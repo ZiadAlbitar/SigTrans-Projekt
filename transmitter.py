@@ -19,6 +19,9 @@ from scipy import signal
 import sounddevice as sd
 
 import wcslib as wcs
+from bandpass import bandpass
+from scipy.signal import sosfilt
+
 
 # TODO: Add relevant parameters to parameters.py
 from parameters import Tb, Ac, dt, fc, Ts, Kc,fs;
@@ -63,8 +66,11 @@ def main():
     # TODO: Implement transmitter code here
     t = np.arange(0, xb.shape[0])*dt
     wc = fc*2 * np.pi
-    xc = np.sin(wc * t) * np.sqrt(2)
+    xc = np.sin(wc * t) * Ac
     xm = xc * xb
+
+    # filter here
+    xm = sosfilt(bandpass(fs), xm)
 
     # Ensure the signal is mono, then play through speakers
     xm_audio = np.stack((xm, np.zeros(xm.shape)), axis=1)
