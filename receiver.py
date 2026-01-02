@@ -31,7 +31,7 @@ def main():
         '--duration',
         help='receiver recording duration',
         type=float,
-        default=10
+        default=25
     )
     args = parser.parse_args()
 
@@ -66,17 +66,19 @@ def main():
 
     #LOW PASS FILTER HERE!!!!!!!!!!!!!!
     # filter out high frequencies so that only 1s or 0s are seen
-    w = 3800 / (fs / 2)  #~3800/7575.8 ~ 0.5
-
-    fc_lp = 2 / Tb
-    Wn = fc_lp / (fs / 2)
+    wn = 3800 / (fs / 2)  #~3800/7575.8 ~ 0.5
+    #w = (2/Tb) / (fs / 2)  #~3800/7575.8 ~ 0.5
+    fc_lp = 1.3 / Tb
+    w = fc_lp / (fs / 2)
+    #wn = fc_lp / (fs / 2)
 
     b, a = signal.butter(5, w , 'lowpass')
     output_I = signal.lfilter(b, a, I)
     output_Q = signal.lfilter(b, a, Q)
-
     phase = np.arctan2(output_I, output_Q)
-    output = np.sqrt(output_I**2 + output_Q**2)
+    output = output_I + 1j*output_Q
+    mag_output = np.sqrt(output_I**2 + output_Q**2)
+
 
     # Symbol decoding
     # TODO: Adjust fs (lab 2 only, leave untouched for lab 1 unless you know what you are doing)
@@ -86,9 +88,9 @@ def main():
     plt.figure()
     plt.plot(I, label='I')
     plt.plot(Q, label='Q')
-    plt.plot(output_I, label='out_I')
     plt.plot(output_Q, label='out_Q')
-    plt.plot(output, label='Envelope')
+    plt.plot(output_I, label='out_I')
+    plt.plot(mag_output, label='mag')
     plt.legend()
     plt.show()
 

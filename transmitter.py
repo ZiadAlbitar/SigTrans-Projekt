@@ -44,7 +44,7 @@ def main():
     args = parser.parse_args()
 
     if args.message is None:
-        args.message = 'Hello World!'
+        args.message = 'hejsan jag heter viktor och jag är glad jippiiiiii0000000'
 
     # Set parameters
     data = args.message

@@ -35,8 +35,8 @@ print(recovered_bits)
  
 
 plt.grid()
-# plt.plot(t , xc, label="xc")
-# plt.plot(t , yb, label="yb")
+plt.plot(t , xc, label="xc")
+plt.plot(t , yd, label="yb")
 plt.plot(t , yb, label="xb")
 plt.legend()
 plt.show()

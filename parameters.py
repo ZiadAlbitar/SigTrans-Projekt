@@ -9,6 +9,7 @@ pi = np.pi
 
 channel_id = 14   # Your channel ID
 Tb = 0.04  # Symbol width in seconds
+# fb = 25
 
 fc = 3800
 wc = 3800*2*pi 
